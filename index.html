@@ -1,0 +1,536 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <link href="https://fonts.googleapis.com/css2?family=News+Cycle&display=swap" rel="stylesheet">
+     <link rel="stylesheet" href="assets/css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"> 
+    <script src="https://kit.fontawesome.com/0fb25a1129.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="assets/css/navbar.css">
+    <link rel="stylesheet" href="assets/css/spin.css">
+    <link rel="stylesheet" href="assets/css/styles_chart.css">
+
+    <!--scripts of charts-->
+    <script src="assets/script/script_india.js"></script>
+    <script src="assets/script/script_world.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>  
+    <link rel="icon" href="assets/image/title_icon.png" type="image/icon type">
+
+    
+    <title>COVID METER</title>
+
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    
+</head>
+<body onload="world()">
+    <div hidden id="spinner"></div>
+    <div id="nav_main">
+        <nav class="nav_bar">
+            <div class="nav_head">
+                COVID-19 <span style="font-size:small ;">METERs</span>
+            </div>
+           <div class="nav_link" id="nav_link">
+                <button onclick="world()" id="w_btn"><i class="fas fa-globe-asia"></i><span>WORLD</span> </button>
+                <button onclick="india()" onmouseover="changeimg(1,1)" onmouseout="changeimg(1,2)" id="in_btn"> <img id="ind" src="assets/image/india2.png" class="nav_img" alt="" srcset=""><span>INDIA</span></button>
+                <button onclick="news()" id="ns_btn"><i class="fas fa-newspaper" ></i><span>NEWS</span></button>
+                <button onclick="info()" id="if_btn"><i class="fas fa-hands-helping"></i><span>HELP</span></button>
+                <button onclick="about()"id="ab_btn"><i class="fas fa-address-card"></i><span>ABOUT</span></button>
+            </div>
+          
+
+        </nav>
+
+    
+    </div>
+    <div class="world" id="world">
+        <p  id="wld_s"></p>
+        <div class="main_head">
+            <p>COVID-19 Global Status</p>
+        </div>
+        
+        <div class="chart">
+                <div id="b_w_1" class="chart_box">  
+                        <div class="chart_title_a"  >
+                            <img class="t_head_icon" src="assets/image/active.png" alt=""> Confirmed
+                        </div>
+                        <div class="chart_data" id="ch_active">
+                               
+                             </div>
+                             <span id="sub_title"><p id="active__w" style="margin: 0px 0px 0px 0px"></p> </span>
+                            </div>
+
+                <div id="b_w_2" class="chart_box">  
+                    <div class="chart_title_r" >
+                        <img class="t_head_icon" src="assets/image/recov.png" alt=""> Recovered
+                    </div>
+                    <div class="chart_data" id="ch_rec">
+                       </div>
+                       <span id="sub_title"><p style="margin: 0px 0px 0px 0px">recovered from virus </p> </span>
+                
+            </div>
+
+            <div id="b_w_3" class="chart_box">  
+                <div class="chart_title_d" >
+                    <img class="t_head_icon" src="assets/image/dead.png" alt=""> Death
+                </div>
+                <div class="chart_data" id="ch_dead">
+                    </div>
+                    <span id="sub_title"><p style="margin: 0px 0px 0px 0px">deaths in india  </p> </span>
+
+            
+        </div>
+
+        </div>
+        <div class="btn_cls">
+            <button id="btn1" class='btn1' onclick="data_view(1,0)">Table View</button>
+            <button id="btn2" class='btn2' onclick="data_view(2,0)">Chart View</button>
+            <button id="btn3" class='btn3' onclick="data_view(3,0)">Map</button>
+        </div>
+        
+        <div id="dtb" class="data_table_box">
+            
+            <table class="data_table">
+                <div class="srch">
+                    <img src="assets/image/search.png" class="icon_ip"  alt="" srcset="">
+                    <input type="text" name="Search" onkeyup="search()" placeholder="Search Country.." id="filter">
+                </div>
+    <tr style="margin: 5px;" class="table_head">
+        <th class="place" id="place"> </th>
+        <th class="active" id="active"><img class="t_head_icon" src="assets/image/active.png" alt="">
+            Confirmed</th>
+        <th class="recovered" id="recovered"><img class="t_head_icon" src="assets/image/recov.png" alt="">
+            Recovered</th>
+       <th class="New Case" id="n_case"><img class="t_head_icon" src="assets/image/n_case.png" alt="">
+                New Case</th>
+        <th class="New Death" id="n_death"><img class="t_head_icon" src="assets/image/n_death.png" alt="">
+                    New Death</th>
+        <th class="death" id="recovered"><img class="t_head_icon" src="assets/image/dead.png" alt="">
+            Death</th>
+        <th class="total" id=><img class="t_head_icon" src="assets/image/act.png" alt="">Active</th>
+    </tr>
+    <tbody id="tablebody">
+    </tbody>       
+     </table>
+        
+
+   </div>
+   <div id="mbw" class="map_box_m">
+            
+    <h1 class="map_head" >Global Chloropleth of COVID-19</h1>
+            <h4 style="font-style:italic">
+                Scroll and click to see details</h4>
+   <div  id="regions_div" ></div>
+
+</div>
+<div id="cbw"  class="chart_box_m">
+            
+    <div id="wrapper">
+        <div id="chart-line_w"></div>
+        
+      </div>
+      
+      <div id="wrapper">
+        <div id="chart2_w"></div>
+        
+      </div>   
+
+</div>
+
+
+
+</div>
+   <div class="india" id="india">
+       <p  id="ind_s"></p>
+    <div class="main_head">
+        <p>COVID-19 Indian Status</p>
+    </div>
+    <div class="chart">
+            <div id="b_i_1" class="chart_box">  
+                    <div class="chart_title_a" >
+                        <img class="t_head_icon" src="assets/image/active.png" alt=""> Confirmed
+                    </div>
+                    <div class="chart_data" id="ch_active_i">
+                           
+                         </div>
+                         <span id="sub_title"><p id="active__i" style="margin: 0px 0px 0px 0px"> </p> </span>
+                        </div>
+
+            <div id="b_i_2" class="chart_box">  
+                <div class="chart_title_r" >
+                    <img class="t_head_icon" src="assets/image/recov.png" alt=""> Recovered
+                </div>
+                <div class="chart_data" id="ch_rec_i">
+                   </div>
+                   <span id="sub_title"><p style="margin: 0px 0px 0px 0px">recovered from virus </p> </span>
+            
+        </div>
+
+        <div id="b_i_3" class="chart_box">  
+            <div class="chart_title_d" >
+                <img class="t_head_icon" src="assets/image/dead.png" alt=""> Death
+            </div>
+            <div class="chart_data" id="ch_dead_i">
+                </div>
+                <span id="sub_title"><p style="margin: 0px 0px 0px 0px">deaths in nation  </p> </span>
+
+        
+    </div>
+
+    </div>
+    
+    <div class="btn_cls">
+<button id="btn1" class='btn1'  onclick="data_view(1,1)">Table View</button>
+<button id="btn2" class='btn2' onclick="data_view(2,1)">Chart View</button>
+
+    </div>
+
+
+    <div id="dtbi" class="data_table_box">
+        <table class="data_table">
+            <div class="srch">
+                <img src="assets/image/search.png" class="icon_ip"  alt="" srcset="">
+                <input type="text" name="Search" onkeyup="search()" placeholder="Search state.." id="filter_i">
+            </div>
+
+<tr style="margin: 5px;" class="table_head">
+    <th class="place" id="place_i"> State/UT</th>
+    <th class="active" id="active_i"><img class="t_head_icon" src="assets/image/active.png" alt="">
+        Confirmed</th>
+    <th class="recovered" id="recovered_i"><img class="t_head_icon" src="assets/image/recov.png" alt="">
+        Recovered</th>
+    <th class="death" id="recovered_i"><img class="t_head_icon" src="assets/image/dead.png" alt="">
+        Death</th>
+    <th class="total" ><img class="t_head_icon" src="assets/image/act.png" alt="">Active</th>
+</tr>
+<tbody id="tablebody_i">
+</tbody>   
+</table>
+    
+<div id="mbi" class="map_box_m">
+         
+    <h1 class="map_head" ></h1>
+            <h4 style="font-style:italic">
+               
+   
+   
+   </div>
+</div>
+
+ <div id="cbi" class="chart_box_m">       
+        <div id="wrapper">
+        <div id="chart-line_ind"></div>
+        
+      </div>
+      <div id="wrapper">
+        <div id="chart_i"></div>      
+      </div>
+      <div id="wrapper">
+        <div id="chart2_i"></div>
+        
+      </div>  
+ </div>
+</div>
+<div class="news" id="news">
+    <div class="main_head">
+        <p>Latest News on Covid-19 <span>Indian and International</span></p>
+    </div>
+    <div class="news_content" id="news_content">
+     
+            
+    </div>
+
+
+
+</div>
+    <div class="info" id="info">
+        <div style="margin-left: 5px; text-decoration: none;" id="lk" >
+            <a href="#links">Goto Important Links</a>
+        </div>
+        <div class="helpline">
+            <span class="help_head">HELP LINE</span>
+            <table>
+           <script>
+
+           
+           var path=[
+    {
+
+        "state":"Central",
+        "nmbr":"+911123978046"
+
+    },
+    {
+        "state":"Andhra Pradesh ",
+        "nmbr":"0866-2410978"
+        
+    },
+    {
+        "state":"Arunachal Pradesh",
+        "nmbr":"9436055743"
+    },
+    {
+        "state":"Assam",
+        "nmbr":"6913347770"
+    },
+    {
+        "state":"Bihar",
+        "nmbr":"104"
+    },
+    {
+        "state":"Chhattisgarh",
+        "nmbr":"104"
+    },
+    {
+        "state":"Goa",
+        "nmbr":"104"
+    },
+    {
+        "state":"Gujarat",
+        "nmbr":"104"
+    },
+    {
+        "state":"Haryana",
+        "nmbr":"8558893911"
+    },
+    {
+        "state":"Himachal Pradesh",
+        "nmbr":"104"
+    },
+    {
+        "state":"Jharkhand ",
+        "nmbr":"104"
+    },
+    {
+        "state":"Karnataka ",
+        "nmbr":"104"
+    },
+    {
+        "state":"Kerala",
+        "nmbr":"0471-2552056"
+    },
+    {
+        "state":"Madhya Pradesh",
+        "nmbr":"0755-2527177"
+    },
+    {
+        "state":"Maharashtra ",
+        "nmbr":"020-26127394"
+    },
+    {
+        "state":"Manipur",
+        "nmbr":"3852411668"
+    },
+    {
+        "state":"Meghalaya",
+        "nmbr":"108"
+    },
+    {
+        "state":"Mizoram ",
+        "nmbr":"102"
+    },
+    {
+        "state":"Nagaland ",
+        "nmbr":"7005539653"
+    },
+    {
+        "state":"Odisha ",
+        "nmbr":"9439994859"
+    },
+    {
+        "state":"Punjab ",
+        "nmbr":"104"
+    },
+    {
+        "state":"Rajasthan",
+        "nmbr":"0141-2225624"
+    },
+    {
+        "state":"Sikkim",
+        "nmbr":"104"
+    },
+    {
+        "state":"Tamil Nadu",
+        "nmbr":"044-29510500"
+    },
+    {
+        "state":"Telangana",
+        "nmbr":"104"
+    },
+    {
+        "state":"Tripura ",
+        "nmbr":"0381-2315879"
+    },
+    {
+        "state":"Uttarakhand ",
+        "nmbr":"104"
+    },
+    {
+        "state":"Uttar Pradesh ",
+        "nmbr":"18001805145"
+    },
+    {
+        "state":"West Bengal  ",
+        "nmbr":"1800313444222, 03323412600"
+    },
+    {
+        "state":"Andaman and Nicobar Islands",
+        "nmbr":"03192-232102"
+    },
+    {
+        "state":"Chandigarh",
+        "nmbr":"9779558282"
+    },
+    {
+        "state":" Daman & Diu",
+        "nmbr":"104"
+    },
+    {
+        "state":"Delhi",
+        "nmbr":"011-22307145"
+    },
+    {
+        "state":"Jammu & Kashmir",
+        "nmbr":"01912520982, 0194-2440283"
+    },
+    {
+        "state":"Ladakh ",
+        "nmbr":"01982256462"
+    }, {
+        "state":"Lakshadweep",
+        "nmbr":"104"
+    },
+    {
+        "state":"Puducherry ",
+        "nmbr":"104"
+    }
+]
+           var data=JSON.parse(JSON.stringify(path));
+            //$name=json_decode($data);
+    
+            for(i=0;i<37;i++){
+                document.write("<tr><td>");
+               // document.write("1");
+           //     document.write(" class='help_list'><li><span class='line_state'>");
+                document.write(path[i].state);
+                document.write("</td><td><a class='call' href='tel:");
+                document.write(data[i].nmbr);
+                document.write("'");
+                document.write("><div class='dial_box'><img src='assets/image/phone.png'  class='dial'><span style='margin-bottom: 3px;'>CALL NOW</span></div></a></td></tr>");
+            
+            }
+            /*
+            for(i=0;i<37;i++){
+                document.write("<ol start=");
+                document.write("1");
+                document.write(" class='help_list'><li><span class='line_state'>");
+                document.write(path[i].state);
+                document.write("</span><a class='call' href='tel:");
+                document.write(data[i].nmbr);
+                document.write("'");
+                document.write("><div class='dial_box'><img src='assets/image/phone.png'  class='dial'><span style='margin-bottom: 3px;'>CALL NOW</span></div></a></li><br>");
+            
+            }*/
+            </script>
+        
+    </table>
+               
+              
+        </div>
+        <div id="links" class="links">
+                <div class="imp_link">
+                    <span class="help_head">Important Links</span>
+                    <ol class="imp_ref">
+                            <li>
+                               <span style="font-family: 'overlock'; font-weight: bold;">WHO:</span>  
+                               <a style="text-decoration: none; color: black;" href="https://www.who.int/emergencies/diseases/novel-coronavirus-2019">https://www.who.int/emergencies/diseases/novel-coronavirus-2019</a>
+                            </li>
+                            <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">MInistry of Family and Health Welfare:</span>  
+                                <a style="text-decoration: none; color: black;" href="https://www.mohfw.gov.in/">https://www.mohfw.gov.in/</a>
+                             </li>
+                             <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">National Health Portal:</span>  
+                                <a style="text-decoration: none; color: black;" href="https://www.nhp.gov.in/">https://www.nhp.gov.in/</a>
+                             </li>
+                             <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">Indian Medical Association:</span>  
+                                <a style="text-decoration: none; color: black;" href="http://www.ima-india.org/ima/">http://www.ima-india.org/ima/</a>
+
+                             </li>
+                           <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">Google COVID-19 Information and Resources:</span>  
+                                <a style="text-decoration: none; color: black;" href="https://www.google.com/covid19/">https://www.google.com/covid19/</a>
+                                
+                             </li>
+                             <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">Press Information Bureau-India:</span>  
+                                <a style="text-decoration: none; color: black;" href="https://pib.gov.in/">https://pib.gov.in//</a>
+                                
+                             </li>
+                             <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">Johns Hopkins Coronavirus Resources Center:</span>  
+                                <a style="text-decoration: none; color: black;" href="https://coronavirus.jhu.edu/map.html">https://coronavirus.jhu.edu/map.html</a>
+                                
+                             </li>
+                             <li>
+                                <span style="font-family: 'overlock'; font-weight: bold;">Directorate of Health Service-Kerala ,COVID-19 Portal</span>  
+                                <a style="text-decoration: none; color: black;" href="https://dhs.kerala.gov.in/public-health-2019-n-corona-virus/">https://dhs.kerala.gov.in/public-health-2019-n-corona-virus/</a>
+                                
+                             </li>
+
+                    </ol>
+                </div>
+        </div>
+
+    </div>
+    <div class="about" id="about">
+        <div class="about_content">
+            <div style="color: black;" class="nav_head">
+                COVID-19 <span style="font-size:small ;">METERS</span>
+            </div>
+            <p class="abt_data">provide latest information on novel coronavirus aka COVID-19. It includes global statastics of COVID-19,Chart View and Chloropleth Data.In addition to this
+                ,COVID-19 count in India(state-wise) is also provided. Other features includes major headlines on COVID-19 from major newspaper around globes and state wise helpline. Global data source is  Johns Hopkins University CSSE  
+            and Indian data is from MInistry of Health and Family Welfare(Govt. of India)  </p>
+            <h1 class="abt_head">About Developer</h1>
+            <p class="abt_data">Aseel SM , web devoleper hailing from Kerala,currently mastering  web developing skills in Zeroark Ltd,Kochi</p>
+            <img src="assets/image/sm_za.png" style="margin-left: 70px; height: 80px; width: 120px;  margin-right: auto;" alt="" srcset="">
+            <div style="margin-left: 70px;">
+                <a href="tel:00919207418150"><i class="fas fa-phone-square-alt" style="font-size:40px; color:black"></i></a>
+                <a href="mailto:aseelsm0027@gmail.com"><i class="fas fa-envelope-square fa-3s" style="font-size:40px; color:black"></i></a>
+                <a href="https://www.instagram.com/aseelsm__/"><i class="fab fa-instagram-square fa-3s"style="font-size:40px; color:black"></i></a>
+                <a href="https://wa.me/919207418150"><i class="fab fa-whatsapp-square" style="font-size:40px; color:black"></i></a>
+                
+            </div>
+              
+        </div>
+
+
+       
+    </div>
+    <div>
+        <nav id="nav_main2" hidden class="nav_bar1">
+          
+           <div class="nav_link1" id="nav_link11">
+                <button onclick="world()" ><i class="fas fa-globe-asia"></i><span class="nav_sm">WORLD</span> </button>
+                <button onmouseover="changeimg(2,1)" onmouseout="changeimg(2,2)" onclick="india()" > <img src="assets/image/india2.png" id="ind1" class="nav_img1" alt="" srcset=""><span class="nav_sm">INDIA</span></button>
+                <button onclick="news()" ><i class="fa fa-newspaper-o" aria-hidden="true"></i><span class="nav_sm">NEWS</span></button>
+                <button onclick="info()" ><i class="fas fa-hands-helping"></i><span class="nav_sm">HELP</span></button>
+                <button id="_1"onclick="about()"><i class="fas fa-address-card"></i><span class="nav_sm">ABOUT</span></button>
+            </div>
+          
+        </nav>
+
+    
+    </div>
+    <div class="footer">© Copyright - All rights reserved - Devoloped by Aseel SM  </div>
+    <script src="assets/script/main.js"></script>    
+ 
+  
+ 
+
+           
+   
+</body>
+</html>

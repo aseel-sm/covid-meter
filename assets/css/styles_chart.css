@@ -1,0 +1,26 @@
+#chart {
+      max-width: 650px;
+      margin: 35px auto;
+    }
+      
+
+    
+    #chart2 {
+      padding: 0;
+      max-width: 650px;
+      margin: 35px auto;
+    }
+    
+    .apexcharts-legend text {
+      font-weight: 900;
+    }
+    #wrapper {
+      padding-top: 20px;
+      padding-left: 10px;
+      background: #fff;
+      border: 1px solid #ddd;
+      -webkit-box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
+              box-shadow: 0 22px 35px -16px rgba(0, 0, 0, 0.1);
+      max-width: 650px;
+      margin:  auto;
+    }
